@@ -1,6 +1,6 @@
 # HotsTrends
 
-A clean, professional web application that aggregates the **hottest tech news** from **Hacker News and NewsAPI** with velocity-based hotness scoring.
+A clean web application that aggregates the **hottest tech news** from **Hacker News and NewsAPI** with velocity-based hotness scoring.
 
 > **Note:** This app is specifically focused on technology news. **Hacker News** provides community-curated tech content with engagement signals, while **NewsAPI** delivers breaking headlines from major mainstream tech publications.
 
@@ -11,7 +11,7 @@ A clean, professional web application that aggregates the **hottest tech news** 
 - **Real-Time Metrics**: Points, comments, and pts/hr displayed on every card
 - **Trending Topics**: Word cloud sidebar showing what tech is talking about NOW
 - **AI Smart Summaries**: OpenAI-powered summaries explaining why each story matters
-- **Clean Design**: Professional, readable interface with classic styling
+- **Clean Design**: Clean, readable interface with classic styling
 - **Responsive**: Works on desktop, tablet, and mobile devices
 
 ---
