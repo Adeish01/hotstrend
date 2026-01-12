@@ -85,7 +85,7 @@ For HN content, we go beyond simple point counts. Here's how each metric works:
 3. **Configure API keys (optional)**
    ```bash
    cp .env.example .env
-   # Edit .env and add: VITE_NEWS_API_KEY=your_key_here
+   # Edit .env and add: NEWS_API_KEY=your_news_API_Key
    ```
 
 4. **Start the development server**
