@@ -1,27 +1,7 @@
 /**
  * NewsAPI Service
- * Fetches news sources and headlines from NewsAPI.org
- * 
- * API Docs: https://newsapi.org/docs
+ * Fetches news sources and headlines via our serverless API
  */
-
-const NEWS_API_BASE = 'https://newsapi.org/v2';
-
-
-
-
-
-
-
-/**
- * Gets the API key from environment variables
- * @returns {string|null} API key or null if not set
- */
-function getApiKey() {
-    return import.meta.env.VITE_NEWS_API_KEY || null;
-}
-
-
 
 /**
  * Fetches top headlines
@@ -38,16 +18,8 @@ export async function fetchTopHeadlines({
     sources = '',
     pageSize = 30
 } = {}) {
-    const apiKey = getApiKey();
-
-    if (!apiKey) {
-        console.warn('NewsAPI key not configured - headlines disabled');
-        return [];
-    }
-
     try {
         const params = new URLSearchParams();
-        params.append('apiKey', apiKey);
         params.append('pageSize', pageSize.toString());
 
         // Note: sources cannot be combined with country or category
@@ -58,7 +30,15 @@ export async function fetchTopHeadlines({
             if (category) params.append('category', category);
         }
 
-        const response = await fetch(`${NEWS_API_BASE}/top-headlines?${params}`);
+        const response = await fetch(`/api/news?${params}`);
+
+        if (!response.ok) {
+            // If 500 or 401, likely key missing or invalid
+            const err = await response.json();
+            console.warn('NewsAPI fetch failed:', err.message || err.error);
+            return [];
+        }
+
         const data = await response.json();
 
         if (data.status !== 'ok') {
@@ -114,16 +94,10 @@ function extractDomain(url) {
     }
 }
 
-
-
-
-
-
-
 /**
  * Check if NewsAPI is configured
- * @returns {boolean} True if API key is set
+ * @returns {boolean} Always true as configuration is on server
  */
 export function isConfigured() {
-    return !!getApiKey();
+    return true;
 }
